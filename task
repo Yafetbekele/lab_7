@@ -1,0 +1,21 @@
+#include <Wire.h>
+#include <LiquidCrystal_I2C.h>
+
+int voltage = A0;
+
+LiquidCrystal_I2C lcd(0x27, 16, 2);
+
+void setup() {
+  pinMode(voltage, INPUT);
+  lcd.init();
+  lcd.backlight();
+}
+
+void loop() {
+  int Voltage = analogRead(voltage);
+  float Vcalc = (5.0/1023) *Voltage;
+
+  lcd.setCursor(0,0);
+  lcd.print("BATTERY ");
+  lcd.print(Vcalc);
+}
